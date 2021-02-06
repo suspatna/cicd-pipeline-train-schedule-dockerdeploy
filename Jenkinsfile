@@ -5,7 +5,7 @@ pipeline {
             steps {
                 echo 'Running build automation'
                 sh './gradlew build --no-daemon'
-                archiveArtifacts artifacts: 'dist/trainwebapp6thfeb.zip'
+                archiveArtifacts artifacts: 'dist/train-schedule.zip'
             }
         }
         stage('Build Docker Image') {
@@ -14,7 +14,7 @@ pipeline {
             }
             steps {
                 script {
-                    app = docker.build("suspatna/trainwebapp6thfeb")
+                    app = docker.build("suspatna/train-schedule")
                     app.inside {
                         sh 'echo $(curl localhost:8080)'
                     }
